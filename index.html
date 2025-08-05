@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make My Project - Instant Projects, Powered by AI</title>
+    <link rel="icon" href="icon.png">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://css.gg/css?=|spinner" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- GSAP (GreenSock Animation Platform) & ScrollTrigger Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        /* Basic styles to set the font and background */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+            color: #FFFFFF;
+            overflow-x: hidden;
+            /* Prevents horizontal scrollbar */
+        }
+
+        /* Custom class for the subtle background grid pattern */
+        .grid-background {
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: moveGrid 20s linear infinite;
+        }
+
+        @keyframes moveGrid {
+            from {
+                background-position: 0 0;
+            }
+
+            to {
+                background-position: 40px 40px;
+            }
+        }
+
+        /* Styling for the animated typing cursor */
+        .typing-cursor::after {
+            content: '▋';
+            animation: blink 1s step-end infinite;
+            color: #4ade80;
+            /* A subtle green for the cursor */
+        }
+
+        @keyframes blink {
+
+            from,
+            to {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Glassmorphism effect for cards and buttons */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Hide scrollbar but allow scrolling */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 w-full z-50 p-4 sm:p-6 transition-all duration-300" id="header">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold tracking-tighter">Make My Project</h1>
+            <a href="#demo"
+                class="hidden sm:inline-block px-6 py-2 text-sm font-semibold border border-gray-700 rounded-full hover:bg-white hover:text-black transition-colors duration-300">
+                Get Started
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero"
+            class="relative min-h-screen flex items-center justify-center p-4 overflow-hidden grid-background">
+            <div class="absolute inset-0 bg-black/50"></div>
+            <div class="relative z-10 text-center space-y-8">
+                <h2 id="hero-title"
+                    class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-tight">
+                    <span class="block">Instant Projects.</span>
+                    <span class="block text-gray-400">Powered by Real AI.</span>
+                </h2>
+                <p id="hero-subtitle" class="max-w-2xl mx-auto text-lg md:text-xl text-gray-300">
+                    From complex essays to flawless code, our AI brings your academic projects to life in seconds. Stop
+                    stressing, start creating.
+                </p>
+                <div id="hero-cta">
+                    <a href="#demo" class="inline-block px-10 py-4 font-bold text-black bg-white rounded-full text-lg
+                        transform hover:scale-105 transition-transform duration-300 shadow-lg shadow-white/20">
+                        Try The AI
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="py-20 sm:py-32 bg-black">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h3 class="text-4xl md:text-5xl font-bold tracking-tighter">One Tool, Infinite Possibilities</h3>
+                    <p class="mt-4 text-lg text-gray-400 max-w-xl mx-auto">Everything you need to excel, all in one
+                        intelligent platform.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Feature Card 1: Essay Generator -->
+                    <div
+                        class="feature-card p-8 rounded-2xl glass-effect flex flex-col items-start space-y-4 transform transition-all duration-500 hover:!opacity-100 hover:scale-105">
+                        <div class="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="text-white">
+                                <path d="M12 22h6a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v10" />
+                                <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                                <path d="M16 18h-4" />
+                                <path d="M18 14h-6" />
+                            </svg>
+                        </div>
+                        <h4 class="text-xl font-bold">Essay Generator</h4>
+                        <p class="text-gray-400 text-sm">Craft well-structured, plagiarism-free essays on any topic in
+                            minutes.</p>
+                    </div>
+
+                    <!-- Feature Card 2: Code Helper -->
+                    <div
+                        class="feature-card p-8 rounded-2xl glass-effect flex flex-col items-start space-y-4 transform transition-all duration-500 hover:!opacity-100 hover:scale-105">
+                        <div class="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="text-white">
+                                <polyline points="16 18 22 12 16 6" />
+                                <polyline points="8 6 2 12 8 18" />
+                                <line x1="10" y1="18" x2="14" y2="6" />
+                            </svg>
+                        </div>
+                        <h4 class="text-xl font-bold">Code Helper</h4>
+                        <p class="text-gray-400 text-sm">Generate code snippets, debug errors, and understand complex
+                            algorithms instantly.</p>
+                    </div>
+
+                    <!-- Feature Card 3: Research Assistant -->
+                    <div
+                        class="feature-card p-8 rounded-2xl glass-effect flex flex-col items-start space-y-4 transform transition-all duration-500 hover:!opacity-100 hover:scale-105">
+                        <div class="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="text-white">
+                                <circle cx="11" cy="11" r="8" />
+                                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                            </svg>
+                        </div>
+                        <h4 class="text-xl font-bold">Research Assistant</h4>
+                        <p class="text-gray-400 text-sm">Get summarized insights, find credible sources, and accelerate
+                            your research process.</p>
+                    </div>
+
+                    <!-- Feature Card 4: Presentation Maker -->
+                    <div
+                        class="feature-card p-8 rounded-2xl glass-effect flex flex-col items-start space-y-4 transform transition-all duration-500 hover:!opacity-100 hover:scale-105">
+                        <div class="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="text-white">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                                <line x1="8" y1="21" x2="16" y2="21" />
+                                <line x1="12" y1="17" x2="12" y2="21" />
+                            </svg>
+                        </div>
+                        <h4 class="text-xl font-bold">Presentation Maker</h4>
+                        <p class="text-gray-400 text-sm">Automatically create engaging slide decks from your notes or
+                            documents.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Demo Section -->
+        <section id="demo" class="py-20 sm:py-32 bg-black overflow-hidden">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h3 class="text-4xl md:text-5xl font-bold tracking-tighter">See the Magic Happen</h3>
+                    <p class="mt-4 text-lg text-gray-400 max-w-xl mx-auto">Give the AI a prompt and watch it generate
+                        content in real-time. Try "write an essay about the solar system" or "create a python function
+                        for a factorial".</p>
+                </div>
+
+                <div
+                    class="max-w-4xl mx-auto rounded-2xl border border-gray-800 shadow-2xl shadow-gray-900/50 glass-effect">
+                    <div class="bg-gray-900/50 rounded-t-xl p-3 flex items-center space-x-2 border-b border-gray-800">
+                        <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                        <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                        <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                    </div>
+                    <div id="terminal"
+                        class="p-6 font-mono text-sm text-gray-300 min-h-[300px] max-h-[50vh] overflow-y-auto no-scrollbar">
+                        <div id="output-container"></div>
+                    </div>
+                    <div class="p-4 border-t border-gray-800 bg-black/20 rounded-b-2xl">
+                        <div class="flex gap-4">
+                            <input type="text" id="prompt-input"
+                                class="flex-grow bg-gray-900/50 border border-gray-700 rounded-lg px-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/50"
+                                placeholder="Enter your prompt here...">
+                            <button id="generate-btn"
+                                class="bg-white text-black font-bold px-6 py-2 rounded-lg hover:bg-gray-200 transition-colors duration-300 flex items-center justify-center">
+                                <span id="btn-text">Generate</span>
+                                <i id="btn-loader" class="gg-spinner hidden"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-black border-t border-gray-900">
+        <div class="container mx-auto px-4 text-center text-gray-500">
+            <p>&copy; 2025 Make My Project. All rights reserved.</p>
+            <p class="text-xs mt-2">Designed to accelerate learning, not replace it. Please use responsibly.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // --- GSAP & ScrollTrigger Registration ---
+            gsap.registerPlugin(ScrollTrigger);
+
+            // --- Header Animation ---
+            gsap.to("#header", {
+                backgroundColor: "rgba(0, 0, 0, 0.7)",
+                backdropFilter: "blur(10px)",
+                borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+                scrollTrigger: {
+                    trigger: "#hero",
+                    start: "bottom top",
+                    end: "+=100",
+                    scrub: 1,
+                }
+            });
+
+            // --- Hero Section Animations ---
+            const heroTimeline = gsap.timeline({ defaults: { ease: 'power3.out' } });
+            heroTimeline
+                .from("#hero-title span", { y: 50, opacity: 0, stagger: 0.2, duration: 1 })
+                .from("#hero-subtitle", { y: 20, opacity: 0, duration: 0.8 }, "-=0.5")
+                .from("#hero-cta", { scale: 0.8, opacity: 0, duration: 0.8 }, "-=0.6");
+
+            // Parallax effect for hero content
+            gsap.to("#hero .relative.z-10", {
+                y: -100,
+                scrollTrigger: {
+                    trigger: "#hero",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+
+            // --- Features Section Animation ---
+            const featureCards = gsap.utils.toArray('.feature-card');
+            gsap.from(featureCards, {
+                scrollTrigger: {
+                    trigger: '#features',
+                    start: 'top 80%',
+                    toggleActions: 'play none none none',
+                },
+                opacity: 0,
+                y: 50,
+                stagger: 0.2,
+                duration: 0.8,
+                ease: 'power3.out'
+            });
+
+            // --- Interactive AI Demo Section ---
+            const generateBtn = document.getElementById('generate-btn');
+            const promptInput = document.getElementById('prompt-input');
+            const outputContainer = document.getElementById('output-container');
+            const terminal = document.getElementById('terminal');
+            const btnText = document.getElementById('btn-text');
+            const btnLoader = document.getElementById('btn-loader');
+
+            // This function will type out the AI's response
+            const typeResponse = (responseHTML) => {
+                const responseElement = document.createElement('div');
+                responseElement.className = 'mt-2';
+                outputContainer.appendChild(responseElement);
+
+                let charIndex = 0;
+                function type() {
+                    if (charIndex < responseHTML.length) {
+                        responseElement.innerHTML += responseHTML.charAt(charIndex);
+                        if (responseHTML.charAt(charIndex) === '<') {
+                            const tagEnd = responseHTML.indexOf('>', charIndex);
+                            if (tagEnd !== -1) {
+                                responseElement.innerHTML += responseHTML.substring(charIndex + 1, tagEnd + 1);
+                                charIndex = tagEnd;
+                            }
+                        }
+                        charIndex++;
+                        terminal.scrollTop = terminal.scrollHeight;
+                        setTimeout(type, 10); // Typing speed
+                    } else {
+                        // Re-enable input for next prompt
+                        btnText.classList.remove('hidden');
+                        btnLoader.classList.add('hidden');
+                        generateBtn.disabled = false;
+                        promptInput.disabled = false;
+                        promptInput.value = '';
+                        promptInput.focus();
+                    }
+                }
+                type();
+            };
+
+            const handleGeneration = async () => {
+                const prompt = promptInput.value.trim();
+                if (!prompt) return;
+
+                // Show loader and disable button
+                btnText.classList.add('hidden');
+                btnLoader.classList.remove('hidden');
+                generateBtn.disabled = true;
+                promptInput.disabled = true;
+
+                // Display user prompt
+                const promptElement = document.createElement('div');
+                promptElement.innerHTML = `<span class="text-green-400">> ${prompt}</span>`;
+                outputContainer.appendChild(promptElement);
+                terminal.scrollTop = terminal.scrollHeight;
+
+                try {
+                    // Call our back-end server
+                    const response = await fetch('http://localhost:3000/api/generate', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ prompt: prompt }),
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`Server error: ${response.statusText}`);
+                    }
+
+                    const data = await response.json();
+                    typeResponse(data.response); // Type out the response from the server
+
+                } catch (error) {
+                    console.error("Failed to fetch from server:", error);
+                    typeResponse(`<span class="text-red-500">Error: Could not connect to the AI service. Please ensure the local server is running.</span>`);
+                }
+            };
+
+            generateBtn.addEventListener('click', handleGeneration);
+            promptInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    handleGeneration();
+                }
+            });
+
+            // Initial prompt display
+            outputContainer.innerHTML = `<div><span class="text-green-400 typing-cursor">> </span></div>`;
+            promptInput.focus();
+        });
+
+
+
+    </script>
+
+</body>
+
+</html>
